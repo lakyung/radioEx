@@ -1,31 +1,33 @@
 radio.onReceivedNumber(function (receivedNumber) {
-    if (receivedNumber == 7) {
-        music.startMelody(music.builtInMelody(Melodies.Wedding), MelodyOptions.Once)
-    }
-    if (receivedNumber == 8) {
-        music.startMelody(music.builtInMelody(Melodies.Birthday), MelodyOptions.Once)
+    if (receivedNumber == 5) {
+        신호수신횟수 += 1
     }
 })
 input.onButtonPressed(Button.A, function () {
-    radio.sendString("jos")
+    투표번호 += -1
+    basic.showNumber(투표번호)
+    basic.pause(500)
 })
 input.onButtonPressed(Button.AB, function () {
-    radio.sendString("yunh")
+    radio.sendNumber(투표번호)
+    투표번호 = 0
 })
 radio.onReceivedString(function (receivedString) {
-    if (receivedString == "kimr") {
-        music.startMelody(music.builtInMelody(Melodies.JumpUp), MelodyOptions.Once)
-        신호전송횟수 += 1
-    }
-})
-input.onButtonPressed(Button.B, function () {
-    radio.sendString("baesu")
-})
-let 신호전송횟수 = 0
-radio.setGroup(1)
-basic.forever(function () {
 	
 })
+input.onButtonPressed(Button.B, function () {
+    투표번호 += 1
+    basic.showNumber(투표번호)
+    basic.pause(500)
+})
+input.onGesture(Gesture.LogoUp, function () {
+    basic.showNumber(신호수신횟수)
+})
+let 신호수신횟수 = 0
+let 투표번호 = 0
+radio.setGroup(1)
+투표번호 = 0
+신호수신횟수 = 0
 basic.forever(function () {
-    basic.showNumber(신호전송횟수)
+	
 })
